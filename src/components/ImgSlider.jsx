@@ -3,6 +3,11 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Pizza  from "../images/pizza.jpg"
+import Burger  from "../images/burger2.jpg"
+import biriyani  from "../images/biriyani.jpg"
+import iceCream  from "../images/icecream.jpg"
+import mutton  from "../images/mutton.jpg";
 
 const ImgSlider = () => {
   let settings = {
@@ -18,34 +23,34 @@ const ImgSlider = () => {
     <Carousel {...settings}>
       <Wrap>
         <a>
-          <img src="/images/pizza.jpg" alt="" />
+          <img src={Pizza} alt="" />
           <span>Life is better with a slice of pizza in hand!</span>
         </a>
       </Wrap>
 
       <Wrap>
         <a>
-          <img src="/images/icecream.jpg" alt="" />
+          <img src={iceCream} alt="" />
           <span>Ice cream: Where friends and flavors meet!</span>
         </a>
       </Wrap>
 
       <Wrap>
         <a>
-          <img src="/images/biriyani.jpg" alt="" />
+          <img src={biriyani} alt="" />
           <span>Biriyani lovers, where every grain is a burst of flavor!</span>
         </a>
       </Wrap>
 
       <Wrap>
         <a>
-          <img src="/images/burger2.jpg" alt="" />
+          <img src={Burger} alt="" />
           <span>Bite into happiness, one burger at a time!</span>
         </a>
       </Wrap>
       <Wrap>
         <a>
-          <img src="/images/mutton.jpg" alt="" />
+          <img src={mutton} alt="" />
           <span>Mutton enthusiasts, savoring the flavor with every bite!</span>
         </a>
       </Wrap>
