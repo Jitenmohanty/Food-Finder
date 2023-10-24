@@ -19,13 +19,6 @@ function RecipeLists(props) {
       props.setLoader(false);
     });
   };
-  // useEffect(() => {
-  //   const list = JSON.parse(localStorage.getItem("Recipe"));
-
-  //   if (list && list.length > 0) {
-  //     setFavList(list);
-  //   }
-  // }, [setFavList]);
   const handleFavoriteRecipe = useCallback(() => {
     setfshow(true);
   },[setfshow]);
@@ -42,9 +35,7 @@ function RecipeLists(props) {
         }
       }
       extractIdFromUrl(apiArray[index]);
-      console.log(apiId);
       clearTimeout();
-    console.log(document.body.scrollHeight);
   };
 
   useEffect(() => {

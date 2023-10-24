@@ -3,13 +3,13 @@ import { fetchDataFromTab } from "../service/Api";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RecipeListItem from "./RecipeListItem";
+import RecipeListItemFav from "./RecipeListItemFav";
 
 const FavListItem = () => {
   const [favList, setFavList] = useState([]);
   const [loader, setLoader] = useState(true);
   const [recipeList, setRecipeList] = useState(false);
-  const [tabData, setTabData] = useState("");
+  const [apiId, setapiId] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const FavListItem = () => {
     if (favList.length > 0) {
       fetchDataFromTab(favList[currentIndex])
         .then((response) => {
-          setTabData(response);
+          setapiId(response);
           setLoader(false);
         })
         .catch((error) => {
@@ -37,9 +37,19 @@ const FavListItem = () => {
   const handleNextClick = () => {
     if (currentIndex < favList.length - 1) {
       setLoader(true);
+      setRecipeList(false);
       setCurrentIndex(currentIndex + 1);
     } else {
       toast.warning("No More items On Fav List");
+    }
+  };
+  const handlePrevClick = () => {
+    if (currentIndex > 0) {
+      setLoader(true);
+      setRecipeList(false);
+      setCurrentIndex(currentIndex - 1);
+    } else {
+      toast.warning("No More Previous Item!");
     }
   };
 
@@ -47,10 +57,10 @@ const FavListItem = () => {
     <div>
       {favList.length > 0 ? (
         <div className="flexbox">
-          {tabData && favList && (
+          {apiId && favList && (
             <div className="flexItem">
               <div className="img-wrapper">
-                <img src={tabData.recipe.image} alt={tabData.recipe.label} />
+                <img src={apiId.recipe.image} alt={apiId.recipe.label} />
               </div>
               {/* <p style={{ display: "none" }}>
                 {apiArray.push(item._links.self.href)}
@@ -60,13 +70,23 @@ const FavListItem = () => {
                   setRecipeList(true);
                 }}
               >
-                {tabData.recipe.label}
+                {apiId.recipe.label}
               </p>
             </div>
           )}
         </div>
       ) : (
         <h5>FavList is Empty</h5>
+      )}
+
+      {currentIndex >= 1 && (
+        <button
+          className="btn"
+          onClick={handlePrevClick}
+          style={{ height: "40px", marginRight: "5px" }}
+        >
+          Prev
+        </button>
       )}
       <button
         className="btn"
@@ -75,12 +95,13 @@ const FavListItem = () => {
       >
         Next
       </button>
+
       {loader && (
         <div className="loader">
           <div className="spinner"></div>
         </div>
       )}
-      {recipeList && <RecipeListItem tabData={tabData} />}
+      {recipeList && <RecipeListItemFav apiId={favList[currentIndex]} />}
     </div>
   );
 };
