@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CiPizza } from "react-icons/ci";
 import { GiNoodles, GiFruitBowl, GiCheckMark } from "react-icons/gi";
-import { FaHeart } from "react-icons/fa";
 
 import { MdOutlineIcecream } from "react-icons/md";
 import { fetchDataFromTab } from "../service/Api";

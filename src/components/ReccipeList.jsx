@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { fetchData } from "../service/Api";
 import RecipeListItem from "./RecipeListItem";
+import FavListItem from "./FavListItem";
 
 function RecipeLists(props) {
   const [searchedTearm, setSearchedTearm] = useState("");
@@ -19,16 +20,16 @@ function RecipeLists(props) {
       props.setLoader(false);
     });
   };
-  useEffect(() => {
-    const list = JSON.parse(localStorage.getItem("Recipe"));
+  // useEffect(() => {
+  //   const list = JSON.parse(localStorage.getItem("Recipe"));
 
-    if (list && list.length > 0) {
-      setFavList(list);
-    }
-  }, []);
+  //   if (list && list.length > 0) {
+  //     setFavList(list);
+  //   }
+  // }, [setFavList]);
   const handleFavoriteRecipe = useCallback(() => {
     setfshow(true);
-  });
+  },[setfshow]);
 
   const handleRecipieListPage = (index) => {
     setRecipeList(true);
@@ -61,11 +62,11 @@ function RecipeLists(props) {
           <button
             className="btn"
             onClick={handleFavoriteRecipe}
-            style={{ fontWeight: "bolder", fontSize: "20px", color: "Black" }}
+            style={{ fontWeight: "bolder", fontSize: "20px", color: "Black" ,marginBottom:"10px"}}
           >
             Favoruite List
           </button>
-          {fshow && <RecipeListItem />}
+          {fshow && <FavListItem/>}
         </div>
         <div className="input-wrapper">
           <input
