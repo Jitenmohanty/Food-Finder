@@ -5,11 +5,6 @@ import { fetchDataFromTab } from "../service/Api";
 function RecipeListItemFav(props) {
   const [tabData, setTabData] = useState(null);
   const [loader, setLoader] = useState(true);
-  const scrollAmount = 500; // Desired scroll amount in pixels
-
-  // Calculate the target position for scrolling
-  const currentScrollPosition = window.scrollY || window.pageYOffset;
-  const targetScrollPosition = currentScrollPosition + scrollAmount;
 
   useEffect(() => {
     fetchDataFromTab(props.apiId)
@@ -18,7 +13,7 @@ function RecipeListItemFav(props) {
         setLoader(false);
         setTimeout(() => {
           window.scrollTo({
-            top: targetScrollPosition ,
+            top: 1600 ,
             behavior: "smooth",
           });
         }, 1000);
