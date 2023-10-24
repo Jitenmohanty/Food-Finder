@@ -13,7 +13,7 @@ function RecipeListItemFav(props) {
         setLoader(false);
         setTimeout(() => {
           window.scrollTo({
-            top: 1600 ,
+            top: 2000 ,
             behavior: "smooth",
           });
         }, 1000);
