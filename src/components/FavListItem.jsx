@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { fetchDataFromTab } from "../service/Api";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RecipeListItem from "./RecipeListItem";
+
 const FavListItem = () => {
   const [favList, setFavList] = useState([]);
+  const [loader, setLoader] = useState(true);
+  const [recipeList, setRecipeList] = useState(false);
   const [tabData, setTabData] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -20,21 +26,21 @@ const FavListItem = () => {
       fetchDataFromTab(favList[currentIndex])
         .then((response) => {
           setTabData(response);
+          setLoader(false);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
     }
-  }, [favList,currentIndex]);
+  }, [favList, currentIndex, setLoader]);
 
   const handleNextClick = () => {
     if (currentIndex < favList.length - 1) {
+      setLoader(true);
       setCurrentIndex(currentIndex + 1);
+    } else {
+      toast.warning("No More items On Fav List");
     }
-    else{
-        
-    }
-    
   };
 
   return (
@@ -42,22 +48,39 @@ const FavListItem = () => {
       {favList.length > 0 ? (
         <div className="flexbox">
           {tabData && favList && (
-            <div  className="flexItem">
+            <div className="flexItem">
               <div className="img-wrapper">
                 <img src={tabData.recipe.image} alt={tabData.recipe.label} />
               </div>
               {/* <p style={{ display: "none" }}>
                 {apiArray.push(item._links.self.href)}
               </p> */}
-              <p>{tabData.recipe.label}</p>
+              <p
+                onClick={() => {
+                  setRecipeList(true);
+                }}
+              >
+                {tabData.recipe.label}
+              </p>
             </div>
           )}
-          
         </div>
       ) : (
-        <h3>FavList is Empty</h3>
+        <h5>FavList is Empty</h5>
       )}
-       <button className="btn" onClick={handleNextClick} style={{height:"40px"}}>Next</button>
+      <button
+        className="btn"
+        onClick={handleNextClick}
+        style={{ height: "40px" }}
+      >
+        Next
+      </button>
+      {loader && (
+        <div className="loader">
+          <div className="spinner"></div>
+        </div>
+      )}
+      {recipeList && <RecipeListItem tabData={tabData} />}
     </div>
   );
 };

@@ -10,7 +10,6 @@ function RecipeLists(props) {
   const [data, setData] = useState("");
   const [resipeList, setRecipeList] = useState(false);
   const [apiId, setApiId] = useState("");
-  const [favList, setFavList] = useState([]);
   const [fshow, setfshow] = useState(false);
   const apiArray = [];
 
@@ -62,7 +61,7 @@ function RecipeLists(props) {
           <button
             className="btn"
             onClick={handleFavoriteRecipe}
-            style={{ fontWeight: "bolder", fontSize: "20px", color: "Black" ,marginBottom:"10px"}}
+            style={{marginBottom:"10px"}}
           >
             Favoruite List
           </button>

@@ -90,7 +90,10 @@ p {
 .recipeHeading {
   color: #6fcb9f;
   text-align: center;
-  font-size: 45px;
+  font-size: 35px;
+  @include small {
+    font-size: 45px;
+  }
 }
 
 .tabs {
@@ -439,19 +442,25 @@ p {
 }
 
 .btn {
-  // position: absolute;
-  top: 10px;
-  /* Adjust the top position as needed */
-  right: 0;
-  /* Set to 0 to position the button at the top right corner */
-  background-color: #6839f4;
-  /* Example background color */
-  color: white;
-  /* Example text color */
+
+  background-color: #f439c5;
+  color: rgb(44, 38, 38);
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 3px;
+  font-weight: bolder;
+  @include small {
+    font-size: 20px;
+  }
+}
+
+.toast-font{
+  font-weight: bold;
+  font-size: 15px;
+  @include small {
+    font-size: 18px;
+  }
 }
