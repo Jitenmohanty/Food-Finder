@@ -32,12 +32,6 @@ function RecipeLists(props) {
 
   const handleRecipieListPage = (index) => {
     setRecipeList(true);
-
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight + 3000,
-        behavior: "smooth",
-      });
       function extractIdFromUrl(apiUrl) {
         const idPattern = /\/([^/]+)\?type=public/;
         const idMatch = apiUrl.match(idPattern);
@@ -50,9 +44,6 @@ function RecipeLists(props) {
       extractIdFromUrl(apiArray[index]);
       console.log(apiId);
       clearTimeout();
-      // console.log(apiArray[index]);
-      // console.log(apiArray);
-    }, 1000);
     console.log(document.body.scrollHeight);
   };
 

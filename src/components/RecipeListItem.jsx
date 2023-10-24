@@ -6,19 +6,32 @@ function RecipeListItem(props) {
   const [tabData, setTabData] = useState(null);
   const [loader, setLoader] = useState(true);
   const [fav, setFav] = useState(false);
-  const [addId, setAddId] = useState(JSON.parse(localStorage.getItem("Recipe")) || []);
-  useEffect(() => {
-    fetchDataFromTab(props.apiId)
-      .then((response) => {
-        setTabData(response);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, [props.apiId]);
+  const [addId, setAddId] = useState(
+    JSON.parse(localStorage.getItem("Recipe")) || []
+  );
+  useEffect(
+    () => {
+      fetchDataFromTab(props.apiId)
+        .then((response) => {
+          setTabData(response);
+          setLoader(false);
+          setFav(false);
+          setTimeout(() => {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "smooth",
+            });
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        })
+        .finally(() => {});
+    },
+    [props.apiId],
+    setFav,
+    setLoader
+  );
 
   useEffect(() => {
     const apiId = JSON.parse(localStorage.getItem("Recipe"));
@@ -26,11 +39,11 @@ function RecipeListItem(props) {
     if (apiId && apiId.includes(props.apiId)) {
       setFav(true);
     }
-   
-  }, [props.apiId]);
+  }, [props.apiId, setFav]);
 
   useEffect(() => {
     localStorage.setItem("Recipe", JSON.stringify(addId));
+    console.log(fav);
   }, [addId]);
 
   const handleClick = useCallback(() => {
@@ -38,7 +51,7 @@ function RecipeListItem(props) {
       setAddId((prevAddId) => [...prevAddId, props.apiId]);
       setFav(true);
     }
-  }, [addId, props.apiId]);
+  }, [addId, props.apiId, setFav]);
 
   if (loader) {
     return (
@@ -63,7 +76,6 @@ function RecipeListItem(props) {
         </button>
       </div>
       <div className="recipe_banner">
-      
         <div className="left-col">
           <span className="badge">
             {tabData.recipe.cuisineType[0]?.toUpperCase()}
@@ -82,7 +94,6 @@ function RecipeListItem(props) {
                   &nbsp;<span>{list}</span>
                 </li>
               ))}
-              
             </ul>
           </div>
         </div>
