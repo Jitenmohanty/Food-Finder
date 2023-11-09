@@ -109,7 +109,6 @@ const Wrap = styled.div`
     cursor: pointer;
     display: block;
     position: relative;
-    padding: 4px;
 
     img {
       width: 100vw;

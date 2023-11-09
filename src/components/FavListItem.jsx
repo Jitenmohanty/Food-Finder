@@ -88,6 +88,7 @@ const FavListItem = () => {
           Prev
         </button>
       )}
+      
       <button
         className="btn"
         onClick={handleNextClick}

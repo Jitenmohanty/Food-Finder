@@ -16,7 +16,7 @@ function RecipeListItem(props) {
         setLoader(false);
         setTimeout(() => {
           window.scrollTo({
-            top: document.body.scrollHeight-1000,
+            top: document.body.scrollHeight-1200,
             behavior: "smooth",
           });
         }, 1000);
