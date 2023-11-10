@@ -20,7 +20,9 @@ h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 12px;
+  @include default{
+    margin-bottom: 12px;
+  }
 }
 
 * {
@@ -334,7 +336,9 @@ p {
   display: flex;
   flex-flow: wrap;
   justify-content: center;
-  gap: 20px;
+  @include default {
+    gap: 10px;
+  }
 
   .flexItem {
     background-color: #fff;
@@ -370,7 +374,7 @@ p {
       overflow: hidden;
       font-weight: bolder;
       font-size: 17px;
-      height: 14%;
+      height: 10%;
       cursor: pointer;
 
       @include medium {
